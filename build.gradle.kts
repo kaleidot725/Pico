@@ -5,8 +5,8 @@ group = "jp.kaleidot725"
 version = "1.0"
 
 plugins {
-    kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.compose") version "1.0.0"
+    kotlin("jvm") version "1.6.10"
+    id("org.jetbrains.compose") version "1.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
 
@@ -18,9 +18,11 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation("org.jetbrains.compose.components:components-splitpane-desktop:1.1.1")
+
     testImplementation(kotlin("test-junit5"))
-    testImplementation("io.kotest:kotest-runner-junit5:5.1.0")
-    testImplementation("io.mockk:mockk:1.12.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.2.2")
+    testImplementation("io.mockk:mockk:1.12.3")
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
@@ -33,13 +35,13 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
-            packageName = "ImageDiff"
+            packageName = "Pico"
             packageVersion = "1.0.0"
 
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
 
             macOS {
-                bundleID = "jp.kaleidot725.imagediff"
+                bundleID = "jp.kaleidot725.pico"
                 iconFile.set(project.file("icon.icns"))
             }
 
