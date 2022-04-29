@@ -28,8 +28,8 @@ fun main() = application {
                     Surface {
                         FileTree(
                             targetDirectory = targetDirectory,
-                            openDialog = { appData.selectTargetDirectory(openDirectory()) },
-                            cancelDialog = { appData.selectTargetDirectory(File("")) },
+                            onOpen = { appData.selectTargetDirectory(openDirectory()) },
+                            onClose = { appData.selectTargetDirectory(File("")) },
                             modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                         )
                     }
