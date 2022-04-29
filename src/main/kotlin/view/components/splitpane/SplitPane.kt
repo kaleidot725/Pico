@@ -1,4 +1,4 @@
-package components.splitpane
+package view.components.splitpane
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

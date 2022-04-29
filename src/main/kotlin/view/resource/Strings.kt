@@ -1,4 +1,4 @@
-package resource
+package view.resource
 
 object Strings {
     const val APP_VERSION = "1.0"

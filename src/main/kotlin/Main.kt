@@ -1,28 +1,37 @@
-// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import components.filetree.FileTree
-import components.preview.Preview
-import components.splitpane.SplitPane
-import resource.MainTheme
-import resource.Strings
+import model.AppData
+import view.common.openDirectory
+import view.components.filetree.FileTree
+import view.components.preview.Preview
+import view.components.splitpane.SplitPane
+import view.resource.MainTheme
+import view.resource.Strings
+
 
 fun main() = application {
+    val appData = AppData()
+    val targetDirectory by appData.targetDirectory.collectAsState()
+
     Window(onCloseRequest = ::exitApplication, title = Strings.APP_NAME) {
         MainTheme(isDarkMode = false) {
             SplitPane(
                 leftContent = {
                     FileTree(
-                        modifier = Modifier.background(Color.LightGray).fillMaxSize()
+                        targetDirectory = targetDirectory,
+                        openDialog = { appData.selectTargetDirectory(openDirectory()) },
+                        modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                     )
                 },
                 rightContent = {
                     Preview(
-                        modifier = Modifier.background(Color.White).fillMaxSize()
+                        modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                     )
                 }
             )
