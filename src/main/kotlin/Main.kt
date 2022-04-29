@@ -14,7 +14,6 @@ import view.components.preview.Preview
 import view.components.splitpane.SplitPane
 import view.resource.MainTheme
 import view.resource.Strings
-import java.io.File
 
 
 fun main() = application {
@@ -29,7 +28,6 @@ fun main() = application {
                         FileTree(
                             targetDirectory = targetDirectory,
                             onOpen = { appData.selectTargetDirectory(openDirectory()) },
-                            onClose = { appData.selectTargetDirectory(File("")) },
                             modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                         )
                     }

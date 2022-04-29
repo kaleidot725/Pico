@@ -9,6 +9,8 @@ class AppData {
     val targetDirectory: StateFlow<File> = _targetDirectory
 
     fun selectTargetDirectory(directory: File) {
+        // force clear
+        _targetDirectory.value = File("")
         _targetDirectory.value = directory
     }
 }

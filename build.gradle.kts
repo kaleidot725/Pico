@@ -19,9 +19,11 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("org.jetbrains.compose.components:components-splitpane-desktop:1.1.1")
+    implementation("cafe.adriel.bonsai:bonsai-core:1.2.0")
+    implementation("cafe.adriel.bonsai:bonsai-file-system:1.2.0")
 
     testImplementation(kotlin("test-junit5"))
-    testImplementation("io.kotest:kotest-runner-junit5:5.2.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.2.3")
     testImplementation("io.mockk:mockk:1.12.3")
 }
 
