@@ -7,5 +7,9 @@ fun openDirectory(): File {
     val fileChooser = JFileChooser()
     fileChooser.fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
     fileChooser.showOpenDialog(null)
-    return fileChooser.selectedFile
+    return try {
+        fileChooser.selectedFile
+    } catch (e: NullPointerException) {
+        File("")
+    }
 }
