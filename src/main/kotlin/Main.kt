@@ -1,3 +1,4 @@
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -25,11 +26,13 @@ fun main() = application {
             SplitPane(
                 leftContent = {
                     Surface {
-                        Explorer(
-                            targetDirectory = targetDirectory,
-                            onOpen = { appData.selectTargetDirectory(openDirectory()) },
-                            modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
-                        )
+                        Crossfade(targetDirectory) {
+                            Explorer(
+                                targetDirectory = targetDirectory,
+                                onOpen = { appData.selectTargetDirectory(openDirectory()) },
+                                modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
+                            )
+                        }
                     }
                 },
                 rightContent = {

@@ -27,7 +27,7 @@ fun SplitPane(leftContent: @Composable () -> Unit, rightContent: @Composable () 
     HorizontalSplitPane(
         splitPaneState = splitterState
     ) {
-        first(200.dp) {
+        first(400.dp) {
             leftContent()
         }
         second {
@@ -37,7 +37,7 @@ fun SplitPane(leftContent: @Composable () -> Unit, rightContent: @Composable () 
             visiblePart {
                 Box(
                     Modifier
-                        .width(2.dp)
+                        .width(1.dp)
                         .fillMaxHeight()
                         .background(Color.LightGray)
                 )
@@ -46,7 +46,7 @@ fun SplitPane(leftContent: @Composable () -> Unit, rightContent: @Composable () 
                 Box(
                     Modifier
                         .markAsHandle()
-                        .width(2.dp)
+                        .width(1.dp)
                         .fillMaxHeight()
                         .background(Color.LightGray)
                         .cursorForHorizontalResize()
