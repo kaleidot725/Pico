@@ -9,7 +9,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import model.AppData
 import view.common.openDirectory
-import view.components.filetree.FileTree
+import view.components.explorer.Explorer
 import view.components.preview.Preview
 import view.components.splitpane.SplitPane
 import view.resource.MainTheme
@@ -25,7 +25,7 @@ fun main() = application {
             SplitPane(
                 leftContent = {
                     Surface {
-                        FileTree(
+                        Explorer(
                             targetDirectory = targetDirectory,
                             onOpen = { appData.selectTargetDirectory(openDirectory()) },
                             modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()

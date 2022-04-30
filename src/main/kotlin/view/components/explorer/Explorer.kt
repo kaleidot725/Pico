@@ -1,4 +1,4 @@
-package view.components.filetree
+package view.components.explorer
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
@@ -28,7 +28,7 @@ import cafe.adriel.bonsai.filesystem.FileSystemTree
 import java.io.File
 
 @Composable
-fun FileTree(
+fun Explorer(
     targetDirectory: File,
     onOpen: () -> Unit,
     modifier: Modifier = Modifier
@@ -37,7 +37,7 @@ fun FileTree(
     Column(modifier) {
         Row(modifier = Modifier.padding(8.dp)) {
             Text(
-                text = "FILE EXPLORER",
+                text = "EXPLORER",
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
