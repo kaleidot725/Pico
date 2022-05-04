@@ -17,7 +17,10 @@ import compose.icons.feathericons.File
 import java.io.File
 
 @Composable
-fun FileItem(file: File, modifier: Modifier = Modifier) {
+fun FileItem(
+    file: File,
+    modifier: Modifier = Modifier
+) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         Spacer(
             modifier = Modifier.size(16.dp).align(Alignment.CenterVertically)
@@ -33,9 +36,8 @@ fun FileItem(file: File, modifier: Modifier = Modifier) {
             text = file.name,
             maxLines = 1,
             fontSize = 12.sp,
-            overflow = TextOverflow.Clip,
+            overflow = TextOverflow.Visible,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
-
 }

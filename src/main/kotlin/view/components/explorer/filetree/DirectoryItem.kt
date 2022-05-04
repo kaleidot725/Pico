@@ -19,7 +19,12 @@ import view.extension.noRippleClickable
 import java.io.File
 
 @Composable
-fun DirectoryItem(file: File, expanded: Boolean, onExpand: () -> Unit, modifier: Modifier = Modifier) {
+fun DirectoryItem(
+    file: File,
+    expanded: Boolean,
+    onExpand: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         val degrees = if (expanded) 90f else 0f
         Icon(
@@ -42,7 +47,7 @@ fun DirectoryItem(file: File, expanded: Boolean, onExpand: () -> Unit, modifier:
             text = file.name,
             maxLines = 1,
             fontSize = 12.sp,
-            overflow = TextOverflow.Clip,
+            overflow = TextOverflow.Visible,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
