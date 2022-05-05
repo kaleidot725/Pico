@@ -1,22 +1,33 @@
 package view.components.explorer
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.mouseClickable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.isPrimaryPressed
+import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import java.io.File
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FileTree(file: File, level: Int, modifier: Modifier = Modifier) {
+fun FileTree(
+    file: File = File(""),
+    level: Int = 0,
+    onPrimaryClick: (File) -> Unit = {},
+    onSecondaryClick: (File) -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
@@ -47,6 +58,14 @@ fun FileTree(file: File, level: Int, modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { }
+                            .mouseClickable {
+                                if (buttons.isPrimaryPressed) {
+                                    onPrimaryClick.invoke(it)
+                                }
+                                if (buttons.isSecondaryPressed) {
+                                    onSecondaryClick.invoke(it)
+                                }
+                            }
                             .padding(horizontal = 8.dp)
                             .padding(start = (level + 1) * 20.dp)
                     )

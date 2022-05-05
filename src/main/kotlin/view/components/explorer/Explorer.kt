@@ -17,6 +17,8 @@ import java.io.File
 fun Explorer(
     targetDirectory: File,
     onOpen: () -> Unit,
+    onPrimaryClick: (File) -> Unit,
+    onSecondaryClick: (File) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -40,6 +42,8 @@ fun Explorer(
                 FileTree(
                     file = targetDirectory,
                     level = 0,
+                    onPrimaryClick = { onPrimaryClick.invoke(it) },
+                    onSecondaryClick = { onSecondaryClick.invoke(it) },
                     modifier = Modifier.verticalScroll(rememberScrollState())
                 )
             }
