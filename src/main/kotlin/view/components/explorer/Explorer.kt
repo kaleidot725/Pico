@@ -16,15 +16,14 @@ import java.io.File
 @Composable
 fun Explorer(
     targetDirectory: File,
-    onOpen: () -> Unit,
-    onPrimaryClick: (File) -> Unit,
-    onSecondaryClick: (File) -> Unit,
+    onClickHome: () -> Unit,
+    onClickMenu: (File) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         Title(
             title = "EXPLORER",
-            onOpen = onOpen,
+            onOpen = onClickHome,
             modifier = Modifier.padding(8.dp)
         )
 
@@ -42,8 +41,7 @@ fun Explorer(
                 FileTree(
                     file = targetDirectory,
                     level = 0,
-                    onPrimaryClick = { onPrimaryClick.invoke(it) },
-                    onSecondaryClick = { onSecondaryClick.invoke(it) },
+                    onClickMenu = { onClickMenu.invoke(it) },
                     modifier = Modifier.verticalScroll(rememberScrollState())
                 )
             }

@@ -31,9 +31,8 @@ fun main() = application {
                         Crossfade(targetDirectory) {
                             Explorer(
                                 targetDirectory = targetDirectory,
-                                onOpen = { appData.selectTargetDirectory(openDirectory()) },
-                                onPrimaryClick = { appData.selectTargetFile(it) },
-                                onSecondaryClick = { appData.clearTargetFile() },
+                                onClickHome = { appData.selectTargetDirectory(openDirectory()) },
+                                onClickMenu = { appData.selectTargetFile(it) },
                                 modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                             )
                         }

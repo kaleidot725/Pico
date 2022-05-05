@@ -27,7 +27,7 @@ fun SplitPane(leftContent: @Composable () -> Unit, rightContent: @Composable () 
     HorizontalSplitPane(
         splitPaneState = splitterState
     ) {
-        first(400.dp) {
+        first(200.dp) {
             leftContent()
         }
         second {
