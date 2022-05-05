@@ -17,13 +17,13 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Preview(bitmap: ImageBitmap?, modifier: Modifier = Modifier) {
+fun Preview(firstBitmap: ImageBitmap?, secondBimap: ImageBitmap?, modifier: Modifier = Modifier) {
     Row(modifier) {
-        PreviewImage(bitmap, modifier = Modifier.weight(weight = 0.5f, fill = true).fillMaxSize())
+        PreviewImage(firstBitmap, modifier = Modifier.weight(weight = 0.5f, fill = true).fillMaxSize())
 
         Spacer(modifier = Modifier.width(1.dp).fillMaxHeight().background(Color.LightGray))
 
-        PreviewImage(bitmap, modifier = Modifier.weight(weight = 0.5f, fill = true).fillMaxSize())
+        PreviewImage(secondBimap, modifier = Modifier.weight(weight = 0.5f, fill = true).fillMaxSize())
     }
 }
 

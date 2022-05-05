@@ -10,28 +10,45 @@ class AppData {
     private val _targetDirectory: MutableStateFlow<File> = MutableStateFlow(File(""))
     val targetDirectory: StateFlow<File> = _targetDirectory
 
-    private val _targetFile: MutableStateFlow<File> = MutableStateFlow(File(""))
-    val targetFile: StateFlow<File> = _targetFile
+    private val _firstPreviewFile: MutableStateFlow<File> = MutableStateFlow(File(""))
+    val firstPreviewFile: StateFlow<File> = _firstPreviewFile
 
-    private val _targetFileBitmap: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
-    val targetFileBitmap: StateFlow<ImageBitmap?> = _targetFileBitmap
+    private val _firstPreviewBitmap: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
+    val firstPreviewBitmap: StateFlow<ImageBitmap?> = _firstPreviewBitmap
+
+    private val _secondPreviewFile: MutableStateFlow<File> = MutableStateFlow(File(""))
+    val secondPreviewFile: StateFlow<File> = _secondPreviewFile
+
+    private val _secondPreviewBitmap: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
+    val secondPreviewBitmap: StateFlow<ImageBitmap?> = _secondPreviewBitmap
 
     fun selectTargetDirectory(directory: File) {
         _targetDirectory.value = directory
     }
 
-    fun selectTargetFile(file: File) {
-        _targetFile.value = file
-
-        try {
-            _targetFileBitmap.value = loadImageBitmap(file.inputStream())
-        } catch (e: Exception) {
-            _targetFileBitmap.value = null
+    fun selectTargetFile(position: PreviewPosition, file: File) {
+        when (position) {
+            PreviewPosition.FIRST -> {
+                _firstPreviewFile.value = file
+                try {
+                    _firstPreviewBitmap.value = loadImageBitmap(file.inputStream())
+                } catch (e: Exception) {
+                    _firstPreviewBitmap.value = null
+                }
+            }
+            PreviewPosition.SECOND -> {
+                _secondPreviewFile.value = file
+                try {
+                    _secondPreviewBitmap.value = loadImageBitmap(file.inputStream())
+                } catch (e: Exception) {
+                    _secondPreviewBitmap.value = null
+                }
+            }
         }
     }
 
     fun clearTargetFile() {
-        _targetFile.value = File("")
-        _targetFileBitmap.value = null
+        _firstPreviewFile.value = File("")
+        _firstPreviewBitmap.value = null
     }
 }

@@ -11,13 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import model.PreviewPosition
 import java.io.File
 
 @Composable
 fun Explorer(
     targetDirectory: File,
     onClickHome: () -> Unit,
-    onClickMenu: (File) -> Unit,
+    onClickMenu: (PreviewPosition, File) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -41,7 +42,7 @@ fun Explorer(
                 FileTree(
                     file = targetDirectory,
                     level = 0,
-                    onClickMenu = { onClickMenu.invoke(it) },
+                    onClickMenu = { position, file -> onClickMenu.invoke(position, file) },
                     modifier = Modifier.verticalScroll(rememberScrollState())
                 )
             }

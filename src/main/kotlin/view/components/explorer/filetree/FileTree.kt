@@ -1,8 +1,8 @@
 package view.components.explorer
 
+import androidx.compose.foundation.ContextMenuArea
+import androidx.compose.foundation.ContextMenuItem
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
+import model.PreviewPosition
 import java.io.File
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -21,23 +22,20 @@ import java.io.File
 fun FileTree(
     file: File = File(""),
     level: Int = 0,
-    onClickMenu: (File) -> Unit = {},
+    onClickMenu: (PreviewPosition, File) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
+    Column(modifier = modifier) {
         DirectoryItem(
             file = file,
             expanded = expanded,
             onExpand = { expanded = !expanded },
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { }
                 .padding(horizontal = 8.dp)
+                .padding(vertical = 4.dp)
                 .padding(start = level * 20.dp)
         )
 
@@ -49,15 +47,31 @@ fun FileTree(
                         level = level + 1
                     )
                 } else {
-                    FileItem(
-                        file = it,
-                        onClickMenu = { onClickMenu.invoke(it) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { }
-                            .padding(horizontal = 8.dp)
-                            .padding(start = (level + 1) * 20.dp)
-                    )
+                    ContextMenuArea(items = {
+                        listOf(
+                            ContextMenuItem("Preview image as first item") {
+                                onClickMenu.invoke(
+                                    PreviewPosition.FIRST,
+                                    it
+                                )
+                            },
+                            ContextMenuItem("Preview image as second item") {
+                                onClickMenu.invoke(
+                                    PreviewPosition.SECOND,
+                                    it
+                                )
+                            }
+                        )
+                    }) {
+                        FileItem(
+                            file = it,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                                .padding(vertical = 4.dp)
+                                .padding(start = (level + 1) * 20.dp)
+                        )
+                    }
                 }
             }
         }

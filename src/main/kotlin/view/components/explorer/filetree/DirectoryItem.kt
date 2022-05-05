@@ -46,7 +46,7 @@ fun DirectoryItem(
         Text(
             text = file.name,
             maxLines = 1,
-            fontSize = 12.sp,
+            fontSize = 14.sp,
             overflow = TextOverflow.Visible,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
