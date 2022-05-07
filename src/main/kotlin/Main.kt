@@ -9,9 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import model.AppData
+import model.PreviewImage
 import view.common.openDirectory
 import view.components.explorer.Explorer
-import view.components.preview.Preview
+import view.components.preview.SoloImageViewer
 import view.components.splitpane.SplitPane
 import view.resource.MainTheme
 import view.resource.Strings
@@ -32,7 +33,7 @@ fun main() = application {
                             Explorer(
                                 targetDirectory = targetDirectory,
                                 onClickHome = { appData.selectTargetDirectory(openDirectory()) },
-                                onClickMenu = { position, file -> appData.selectTargetFile(file, position) },
+                                onClickFile = { file -> appData.selectTargetFile(file, PreviewImage.Position.FIRST) },
                                 modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                             )
                         }
@@ -40,9 +41,8 @@ fun main() = application {
                 },
                 rightContent = {
                     Surface {
-                        Preview(
-                            firstBitmap = firstPreviewImage,
-                            secondBimap = secondPreviewImage,
+                        SoloImageViewer(
+                            previewImage = firstPreviewImage,
                             modifier = Modifier
                                 .background(MaterialTheme.colors.background)
                                 .fillMaxSize()
