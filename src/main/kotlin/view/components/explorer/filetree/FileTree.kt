@@ -44,7 +44,8 @@ fun FileTree(
                 if (it.isDirectory) {
                     FileTree(
                         file = it,
-                        level = level + 1
+                        level = level + 1,
+                        onClickMenu = onClickMenu
                     )
                 } else {
                     ContextMenuArea(items = {
