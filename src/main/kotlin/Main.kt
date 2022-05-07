@@ -20,8 +20,8 @@ import view.resource.Strings
 fun main() = application {
     val appData = AppData()
     val targetDirectory by appData.targetDirectory.collectAsState()
-    val firstPreviewBitmap by appData.firstPreviewBitmap.collectAsState()
-    val secondPreviewBitmap by appData.secondPreviewBitmap.collectAsState()
+    val firstPreviewImage by appData.firstPreviewImage.collectAsState()
+    val secondPreviewImage by appData.secondPreviewImage.collectAsState()
 
     Window(onCloseRequest = ::exitApplication, title = Strings.APP_NAME) {
         MainTheme(isDarkMode = false) {
@@ -32,7 +32,7 @@ fun main() = application {
                             Explorer(
                                 targetDirectory = targetDirectory,
                                 onClickHome = { appData.selectTargetDirectory(openDirectory()) },
-                                onClickMenu = { position, file -> appData.selectTargetFile(position, file) },
+                                onClickMenu = { position, file -> appData.selectTargetFile(file, position) },
                                 modifier = Modifier.background(MaterialTheme.colors.background).fillMaxSize()
                             )
                         }
@@ -41,8 +41,8 @@ fun main() = application {
                 rightContent = {
                     Surface {
                         Preview(
-                            firstBitmap = firstPreviewBitmap,
-                            secondBimap = secondPreviewBitmap,
+                            firstBitmap = firstPreviewImage,
+                            secondBimap = secondPreviewImage,
                             modifier = Modifier
                                 .background(MaterialTheme.colors.background)
                                 .fillMaxSize()

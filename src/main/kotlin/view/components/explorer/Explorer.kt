@@ -11,14 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.PreviewPosition
+import model.PreviewImage
 import java.io.File
 
 @Composable
 fun Explorer(
     targetDirectory: File,
     onClickHome: () -> Unit,
-    onClickMenu: (PreviewPosition, File) -> Unit,
+    onClickMenu: (PreviewImage.Position, File) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {

@@ -13,11 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
+import model.PreviewImage
 
 @Composable
-fun Preview(firstBitmap: ImageBitmap?, secondBimap: ImageBitmap?, modifier: Modifier = Modifier) {
+fun Preview(
+    firstBitmap: PreviewImage,
+    secondBimap: PreviewImage,
+    modifier: Modifier = Modifier
+) {
     Row(modifier) {
         PreviewImage(firstBitmap, modifier = Modifier.weight(weight = 0.5f, fill = true).fillMaxSize())
 
@@ -28,10 +32,14 @@ fun Preview(firstBitmap: ImageBitmap?, secondBimap: ImageBitmap?, modifier: Modi
 }
 
 @Composable
-private fun PreviewImage(bitmap: ImageBitmap?, modifier: Modifier = Modifier) {
+private fun PreviewImage(previewImage: PreviewImage, modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
-        if (bitmap != null) {
-            Image(bitmap = bitmap, contentDescription = "", modifier = Modifier.align(Alignment.Center))
+        if (previewImage != PreviewImage.EMPTY) {
+            Image(
+                bitmap = previewImage.loadImageBitmap(),
+                contentDescription = "",
+                modifier = Modifier.align(Alignment.Center)
+            )
         } else {
             Text(text = "has error", modifier = Modifier.align(Alignment.Center))
         }

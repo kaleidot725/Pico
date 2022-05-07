@@ -1,7 +1,5 @@
 package model
 
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.loadImageBitmap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.io.File
@@ -10,45 +8,24 @@ class AppData {
     private val _targetDirectory: MutableStateFlow<File> = MutableStateFlow(File(""))
     val targetDirectory: StateFlow<File> = _targetDirectory
 
-    private val _firstPreviewFile: MutableStateFlow<File> = MutableStateFlow(File(""))
-    val firstPreviewFile: StateFlow<File> = _firstPreviewFile
+    private val _firstPreviewImage: MutableStateFlow<PreviewImage> = MutableStateFlow(PreviewImage.EMPTY)
+    val firstPreviewImage: StateFlow<PreviewImage> = _firstPreviewImage
 
-    private val _firstPreviewBitmap: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
-    val firstPreviewBitmap: StateFlow<ImageBitmap?> = _firstPreviewBitmap
-
-    private val _secondPreviewFile: MutableStateFlow<File> = MutableStateFlow(File(""))
-    val secondPreviewFile: StateFlow<File> = _secondPreviewFile
-
-    private val _secondPreviewBitmap: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
-    val secondPreviewBitmap: StateFlow<ImageBitmap?> = _secondPreviewBitmap
+    private val _secondPreviewImage: MutableStateFlow<PreviewImage> = MutableStateFlow(PreviewImage.EMPTY)
+    val secondPreviewImage: StateFlow<PreviewImage> = _secondPreviewImage
 
     fun selectTargetDirectory(directory: File) {
         _targetDirectory.value = directory
     }
 
-    fun selectTargetFile(position: PreviewPosition, file: File) {
+    fun selectTargetFile(file: File, position: PreviewImage.Position) {
         when (position) {
-            PreviewPosition.FIRST -> {
-                _firstPreviewFile.value = file
-                try {
-                    _firstPreviewBitmap.value = loadImageBitmap(file.inputStream())
-                } catch (e: Exception) {
-                    _firstPreviewBitmap.value = null
-                }
+            PreviewImage.Position.FIRST -> {
+                _firstPreviewImage.value = PreviewImage(file, position)
             }
-            PreviewPosition.SECOND -> {
-                _secondPreviewFile.value = file
-                try {
-                    _secondPreviewBitmap.value = loadImageBitmap(file.inputStream())
-                } catch (e: Exception) {
-                    _secondPreviewBitmap.value = null
-                }
+            PreviewImage.Position.SECOND -> {
+                _secondPreviewImage.value = PreviewImage(file, position)
             }
         }
-    }
-
-    fun clearTargetFile() {
-        _firstPreviewFile.value = File("")
-        _firstPreviewBitmap.value = null
     }
 }

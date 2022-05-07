@@ -14,7 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
-import model.PreviewPosition
+import model.PreviewImage
 import java.io.File
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -22,7 +22,7 @@ import java.io.File
 fun FileTree(
     file: File = File(""),
     level: Int = 0,
-    onClickMenu: (PreviewPosition, File) -> Unit = { _, _ -> },
+    onClickMenu: (PreviewImage.Position, File) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -51,16 +51,10 @@ fun FileTree(
                     ContextMenuArea(items = {
                         listOf(
                             ContextMenuItem("Preview image as first item") {
-                                onClickMenu.invoke(
-                                    PreviewPosition.FIRST,
-                                    it
-                                )
+                                onClickMenu.invoke(PreviewImage.Position.FIRST, it)
                             },
                             ContextMenuItem("Preview image as second item") {
-                                onClickMenu.invoke(
-                                    PreviewPosition.SECOND,
-                                    it
-                                )
+                                onClickMenu.invoke(PreviewImage.Position.SECOND, it)
                             }
                         )
                     }) {
